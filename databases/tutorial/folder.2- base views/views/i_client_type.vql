@@ -1,4 +1,22 @@
-﻿CREATE OR REPLACE INTERFACE VIEW i_client_type (
+CREATE TABLE client_type I18N us_mst (
+        code:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '2', description = ''),
+        value:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '100', description = '')
+    )
+    FOLDER = '/3- derived views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD client_type(
+        I18N us_mst
+        CONSTRAINTS (
+             ADD code (any) OPT ANY
+             ADD value (any) OPT ANY
+        )
+        OUTPUTLIST (code, value
+        )
+        WRAPPER (jdbc client_type)
+    );
+
+CREATE OR REPLACE INTERFACE VIEW i_client_type (
         code:text,
         value:text
     )

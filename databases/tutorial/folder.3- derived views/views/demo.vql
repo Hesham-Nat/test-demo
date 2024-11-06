@@ -1,0 +1,9 @@
+﻿CREATE OR REPLACE INTERFACE VIEW demo (
+        client_id:text,
+        name:text,
+        surname:text,
+        client_type:text
+    )
+    SET IMPLEMENTATION client
+    FOLDER = '/3- derived views';
+

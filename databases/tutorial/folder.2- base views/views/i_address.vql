@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE INTERFACE VIEW demo (
+﻿CREATE OR REPLACE INTERFACE VIEW i_address (
         code:text,
         value:text
     )

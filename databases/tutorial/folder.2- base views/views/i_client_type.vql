@@ -1,3 +1,61 @@
+# Generated with Denodo Platform 8.0 20240926.
+
+CREATE OR REPLACE FOLDER '/1 - first steps' ;
+
+DROP DATASOURCE JDBC IF EXISTS acme_crm_ds CASCADE;
+
+CREATE DATASOURCE JDBC acme_crm_ds
+    FOLDER = '/1 - first steps'
+    DRIVERCLASSNAME = 'com.mysql.cj.jdbc.Driver'
+    DATABASEURI = 'jdbc:mysql://localhost:3306/acme_crm'
+    USERNAME = 'acme_user'
+    USERPASSWORD = '6bf3BiYw+V2caI1/2agurm75yI+cGJbg4m7q7ZSe7YQM3+1BHacgyM71xoHvKn+4aIZ4E1y3WFeeElOdMqfNVh58WhJtasBSjdOKwG7NT7lfkmoHbpTzr8TKIUtfhySM' ENCRYPTED
+    CLASSPATH = 'mysql-8'
+    DATABASENAME = 'mysql'
+    DATABASEVERSION = '8'
+    FETCHSIZE = 1000
+    VALIDATIONQUERY = 'Select 1'
+    INITIALSIZE = 4
+    MAXIDLE = -1
+    MINIDLE = 0
+    MAXACTIVE = 20
+    EXHAUSTEDACTION = 1
+    TESTONBORROW = true
+    TESTONRETURN = false
+    TESTWHILEIDLE = false
+    TIMEBETWEENEVICTION = -1
+    NUMTESTPEREVICTION = 3
+    MINEVICTABLETIME = 1800000
+    POOLPREPAREDSTATEMENTS = false
+    MAXOPENPREPAREDSTATEMENTS = -1
+    PROPERTIES ('allowLoadLocalInfile'='true', 'vdp.streamRows'='yes')
+    DATA_LOAD_CONFIGURATION (
+        BATCHINSERTSIZE = 200
+        USEEXTERNALTABLES ( 
+            ONMOVEREAD = false,
+            ONMOVEWRITE = true
+        )
+    )
+    SOURCECONFIGURATION (
+        delegatescalarfunctionslist = (abs, acos, addday, addhour, addminute, addmonth, addsecond, addweek, addyear, ascii, asin, atan, atan2, case, cast, ceil, char, coalesce, concat, convert_timezone, convert_timezone(evaluate_literal), cos, cot, current_date, degrees, div, exp, expression_list, firstdayofmonth, floor, formatdate, getday, getdayofweek, getdayofyear, getdaysbetween, gethour, getmicrosecond, getmillisecond, getminute, getmonth, getmonthsbetween, getnanosecond, getsecond, gettimeinmillis, getweek, getyear, instr, lastdayofmonth, len, ln, localtimestamp(evaluate_literal), log, lower, ltrim, max, min, mod, mult, now, nullif, pi, position, pow, power, radians, rand, removeaccents, repeat, replace, round, rtrim, sign, sin, sql_trim, sqrt, substr, substring, subtract, sum, tan, textcat, textconstant, to_date, to_localdate, to_time, to_timestamp, trim, trunc, upper)
+    );
+
+CREATE OR REPLACE FOLDER '/3- Derived Views' ;
+
+DROP WRAPPER JDBC IF EXISTS client_type CASCADE;
+
+CREATE WRAPPER JDBC client_type
+    FOLDER = '/3- derived views'
+    DATASOURCENAME=acme_crm_ds
+    CATALOGNAME='acme_crm' 
+    RELATIONNAME='client_type' 
+    OUTPUTSCHEMA (
+        code = 'code' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='2', description='', sourcetypeid='12', sourcetypename='VARCHAR')  NOT NULL SORTABLE,
+        value = 'value' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='100', description='', sourcetypeid='12', sourcetypename='VARCHAR')  ESCAPE SORTABLE
+    );
+
+DROP VIEW IF EXISTS client_type CASCADE;
+
 CREATE TABLE client_type I18N us_mst (
         code:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '2', description = ''),
         value:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '100', description = '')
@@ -15,6 +73,7 @@ CREATE TABLE client_type I18N us_mst (
         )
         WRAPPER (jdbc client_type)
     );
+
 
 CREATE OR REPLACE INTERFACE VIEW i_client_type (
         code:text,

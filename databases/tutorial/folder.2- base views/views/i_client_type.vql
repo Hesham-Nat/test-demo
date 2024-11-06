@@ -2,5 +2,5 @@
         code:text,
         value:text
     )
-    SET IMPLEMENTATION address
+    SET IMPLEMENTATION client_type
     FOLDER = '/2- base views';

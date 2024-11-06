@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE INTERFACE VIEW i_address (
+﻿CREATE OR REPLACE INTERFACE VIEW i_client_type (
         code:text,
         value:text
     )

@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW client_j_client_type FOLDER = '/integration_views' AS SELECT client.client_id AS client_id, client.name AS name, client.surname AS surname, client.client_type AS client_type, client_type.code AS code, client_type.value AS value FROM client AS client INNER JOIN client_type AS client_type ON client.client_type = client_type.code ;
-
-ALTER VIEW client_j_client_type
- LAYOUT (client = [57, 61, 200, 200], client_type = [316, 53, 200, 200]);
-

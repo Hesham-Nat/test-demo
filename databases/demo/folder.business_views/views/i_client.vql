@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE INTERFACE VIEW i_client (
-        flag:text
-    )
-    FOLDER = '/business_views';
-

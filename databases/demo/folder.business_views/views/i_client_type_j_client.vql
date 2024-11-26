@@ -6,5 +6,6 @@
         surname:text (sourcetyperadix = '10', sourcetypesize = '100', sourcetypeid = '12'),
         client_type:text (sourcetyperadix = '10', sourcetypesize = '2', sourcetypeid = '12')
     )
+    SET IMPLEMENTATION client_type_j_client
     FOLDER = '/business_views';
 

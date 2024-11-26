@@ -1,0 +1,10 @@
+﻿CREATE OR REPLACE INTERFACE VIEW i_client_type_j_client (
+        code:text (sourcetyperadix = '10', sourcetypesize = '2', sourcetypeid = '12'),
+        value:text (sourcetyperadix = '10', sourcetypesize = '100', sourcetypeid = '12'),
+        client_id:text (sourcetyperadix = '10', sourcetypesize = '50', sourcetypeid = '12'),
+        name:text (sourcetyperadix = '10', sourcetypesize = '100', sourcetypeid = '12'),
+        surname:text (sourcetyperadix = '10', sourcetypesize = '100', sourcetypeid = '12'),
+        client_type:text (sourcetyperadix = '10', sourcetypesize = '2', sourcetypeid = '12')
+    )
+    FOLDER = '/business_views';
+
